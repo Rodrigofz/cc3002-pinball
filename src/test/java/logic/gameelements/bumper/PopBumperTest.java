@@ -23,4 +23,21 @@ public class PopBumperTest {
         assertEquals(100, bumperTest.getScore());
     }
 
+    @Test
+    public void hitsTest() {
+        assertEquals(3, bumperTest.remainingHitsToUpgrade());
+        bumperTest.setRemainingHits(4);
+        assertEquals(4, bumperTest.remainingHitsToUpgrade());
+        bumperTest.hit();
+        assertEquals(3, bumperTest.remainingHitsToUpgrade());
+    }
+
+
+    @Test
+    public void setScoreTest() {
+        assertEquals(100, bumperTest.getScore());
+        bumperTest.setScore(700);
+        assertEquals(700, bumperTest.getScore());
+    }
+
 }

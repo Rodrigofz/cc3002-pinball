@@ -1,9 +1,8 @@
 package logic.gameelements.bumper;
-import logic.table.Table;
-import logic.table.TableClass;
+import visitor.ScoreVisitor;
+import visitor.UpgradeVisitor;
 
 import java.util.Observable;
-import java.util.Observer;
 
 public abstract class AbstractBumper extends Observable implements Bumper  {
     private int remainingHits;
@@ -11,9 +10,8 @@ public abstract class AbstractBumper extends Observable implements Bumper  {
     private boolean upgraded;
 
     //Constructor
-    public AbstractBumper(TableClass table){
+    public AbstractBumper(){
         this.upgraded = false;
-        addObserver(table);
     }
 
     public void setRemainingHits(int value){
@@ -26,6 +24,8 @@ public abstract class AbstractBumper extends Observable implements Bumper  {
 
     public void upgrade(){
         this.upgraded = true;
+        this.setChanged();
+        notifyObservers(new UpgradeVisitor());
     }
 
     public void downgrade(){
@@ -38,7 +38,11 @@ public abstract class AbstractBumper extends Observable implements Bumper  {
 
     public int hit(){
         this.remainingHits--;
-        notifyObservers();
+        if (remainingHitsToUpgrade() == 0){
+            upgrade();
+        }
+        this.setChanged();
+        notifyObservers(new ScoreVisitor());
         return getScore();
     }
 

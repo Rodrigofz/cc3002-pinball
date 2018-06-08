@@ -1,6 +1,9 @@
 package logic.gameelements.target;
 
+import visitor.ScoreVisitor;
+
 import java.util.Observable;
+import java.util.Observer;
 
 public abstract class AbstractTarget extends Observable implements Target{
     private boolean active;
@@ -10,7 +13,7 @@ public abstract class AbstractTarget extends Observable implements Target{
         active = true;
     }
 
-    public void setScore(int value){
+    public void setScore(int value) {
         this.score = value;
     }
 
@@ -20,6 +23,8 @@ public abstract class AbstractTarget extends Observable implements Target{
 
     public int hit() {
         this.setInactive();
+        this.setChanged();
+        notifyObservers(new ScoreVisitor());
         return score;
     }
 
@@ -36,4 +41,5 @@ public abstract class AbstractTarget extends Observable implements Target{
     public int getScore(){
         return score;
     }
+
 }

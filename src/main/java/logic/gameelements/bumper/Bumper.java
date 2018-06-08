@@ -1,6 +1,9 @@
 package logic.gameelements.bumper;
 
+
 import logic.gameelements.Hittable;
+
+import java.util.Observable;
 
 /**
  * Interface that represents operations related to a bumper behavior.

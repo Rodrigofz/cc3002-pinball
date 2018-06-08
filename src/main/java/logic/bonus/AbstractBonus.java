@@ -1,5 +1,7 @@
 package logic.bonus;
 
+import controller.Game;
+
 public abstract class AbstractBonus implements Bonus {
     private int timesTriggered;
 
@@ -7,15 +9,11 @@ public abstract class AbstractBonus implements Bonus {
         timesTriggered = 0;
     }
 
-    public void setTimesTriggered(int timesTriggered) {
-        this.timesTriggered = timesTriggered;
-    }
-
     public int timesTriggered(){
         return timesTriggered;
     }
 
-    public void trigger(){
+    public void trigger(Game game){
         timesTriggered ++;
     }
 

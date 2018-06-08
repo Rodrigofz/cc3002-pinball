@@ -8,6 +8,7 @@ import logic.bonus.JackPotBonus;
 import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
 import logic.table.Table;
+import logic.table.TableClass;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class HomeworkTwoFacade {
      * @return true if the current table is playable, false otherwise
      */
     public boolean isPlayableTable() {
-        return false;
+        return game.getCurrentTable().isPlayableTable();
     }
 
     /**
@@ -38,8 +39,8 @@ public class HomeworkTwoFacade {
      *
      * @return the DropTargetBonus instance
      */
-    public Bonus getDropTargetBonus() {
-        return null;
+    public Bonus getDropTargetBonus(){
+        return game.getDropTargetBonus();
     }
 
     /**
@@ -48,7 +49,7 @@ public class HomeworkTwoFacade {
      * @return the ExtraBallBonus instance
      */
     public Bonus getExtraBallBonus() {
-        return null;
+        return game.getExtraBallBonus();
     }
 
     /**
@@ -57,7 +58,7 @@ public class HomeworkTwoFacade {
      * @return the JackPotBonus instance
      */
     public Bonus getJackPotBonus() {
-        return null;
+        return game.getJackPotBonus();
     }
 
     /**
@@ -69,7 +70,7 @@ public class HomeworkTwoFacade {
      * @return a new table determined by the parameters
      */
     public Table newPlayableTableWithNoTargets(String name, int numberOfBumpers, double prob) {
-        return null;
+        return new TableClass(name, numberOfBumpers, prob, 0, 0);
     }
 
     /**
@@ -78,12 +79,12 @@ public class HomeworkTwoFacade {
      * @param name                the name of the table
      * @param numberOfBumpers     the number of bumpers in the table
      * @param prob                the probability a {@link logic.gameelements.bumper.PopBumper}
-     * @param numberOfTargets     the number of {@link logic.gameelements.target.SpotTarget}
+     * @param numberOfSpotTargets the number of {@link logic.gameelements.target.SpotTarget}
      * @param numberOfDropTargets the number of {@link logic.gameelements.target.DropTarget}
      * @return a new table determined by the parameters
      */
-    public Table newFullPlayableTable(String name, int numberOfBumpers, double prob, int numberOfTargets, int numberOfDropTargets) {
-        return null;
+    public Table newFullPlayableTable(String name, int numberOfBumpers, double prob, int numberOfSpotTargets, int numberOfDropTargets) {
+        return new TableClass(name, numberOfBumpers, prob, numberOfSpotTargets, numberOfDropTargets);
     }
 
     /**
@@ -93,7 +94,7 @@ public class HomeworkTwoFacade {
      * @see Bumper
      */
     public List<Bumper> getBumpers() {
-        return null;
+        return game.getBumpers();
     }
 
     /**
@@ -102,8 +103,8 @@ public class HomeworkTwoFacade {
      * @return the list of targets
      * @see Target
      */
-    public List<Target> getTargets() {
-        return null;
+    public List<Target> getTargets(){
+        return game.getTargets();
     }
 
     /**
@@ -112,7 +113,7 @@ public class HomeworkTwoFacade {
      * @return the name of the current table
      */
     public String getTableName() {
-        return null;
+        return game.getTableName();
     }
 
     /**
@@ -121,7 +122,7 @@ public class HomeworkTwoFacade {
      * @return the number of available balls
      */
     public int getAvailableBalls() {
-        return 0;
+        return game.getAvailableBalls();
     }
 
     /**
@@ -130,7 +131,7 @@ public class HomeworkTwoFacade {
      * @return the earned score
      */
     public int getCurrentScore() {
-        return 0;
+        return game.getCurrentScore();
     }
 
     /**
@@ -140,7 +141,7 @@ public class HomeworkTwoFacade {
      * @see Table
      */
     public Table getCurrentTable() {
-        return null;
+        return game.getCurrentTable();
     }
 
     /**
@@ -149,7 +150,7 @@ public class HomeworkTwoFacade {
      * @param newTable the new table
      */
     public void setGameTable(Table newTable) {
-
+        game.setGameTable(newTable);
     }
 
     /**
@@ -158,7 +159,7 @@ public class HomeworkTwoFacade {
      * @return the new number of available balls
      */
     public int dropBall() {
-        return 0;
+        return game.dropBall();
     }
 
     /**
@@ -167,6 +168,6 @@ public class HomeworkTwoFacade {
      * @return true if the game is over, false otherwise
      */
     public boolean gameOver() {
-        return false;
+        return game.gameOver();
     }
 }

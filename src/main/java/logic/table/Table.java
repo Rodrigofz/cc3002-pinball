@@ -1,8 +1,11 @@
 package logic.table;
 
 import logic.gameelements.bumper.Bumper;
+import logic.gameelements.target.DropTarget;
+import logic.gameelements.target.SpotTarget;
 import logic.gameelements.target.Target;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
 
@@ -63,4 +66,19 @@ public interface Table {
      * @return true if the table is playable, false otherwise
      */
     boolean isPlayableTable();
+
+    void changeScore(int dif);
+
+    int getScore();
+
+    void bumperUpgraded();
+
+    void notifySpotTarget();
+
+    void notifyDropTarget();
+
+    void updatePlayable(int numberOfBalls);
+
+    public void setCurrentlyDroppedDropTargets(int newValue);
+
 }

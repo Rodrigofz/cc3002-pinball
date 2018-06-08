@@ -1,6 +1,7 @@
 package logic.gameelements;
 
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Interface that represents a hittable object.
@@ -26,4 +27,5 @@ public interface Hittable{
      * @return the current score of the object when hit
      */
     int getScore();
+
 }

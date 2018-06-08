@@ -19,5 +19,20 @@ public class SpotTargetTest {
         assertEquals(0, targetTest.getScore());
     }
 
+    @Test
+    public void setInactiveTest() {
+        assertTrue(targetTest.isActive());
+        targetTest.setInactive();
+        assertFalse(targetTest.isActive());
+    }
+
+    @Test
+    public void hitAndResetTest() {
+        assertTrue(targetTest.isActive());
+        targetTest.hit();
+        assertFalse(targetTest.isActive());
+        targetTest.reset();
+        assertTrue(targetTest.isActive());
+    }
 
 }

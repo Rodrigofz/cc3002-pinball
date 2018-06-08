@@ -8,72 +8,70 @@ import logic.gameelements.bumper.Bumper;
 import logic.gameelements.target.Target;
 import logic.table.Table;
 import logic.table.TableClass;
+import visitor.Visitor;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Game logic controller class.
  *
  * @author Juan-Pablo Silva
  */
-public class Game {
-    private List<Table>  tables;
-    private Table activeTable;
+
+public class Game implements Observer{
+    private Table table;
     private Bonus extraBallBonus;
     private Bonus dropTargetBonus;
     private Bonus jackPotBonus;
     private int balls;
+    private int score;
 
-    public void Game(){
+
+    public Game(){
         extraBallBonus = new ExtraBallBonus();
         dropTargetBonus = new DropTargetBonus();
         jackPotBonus = new JackPotBonus();
-        balls = 0;
-    }
-
-    public void newPlayableTableWithNoTargets(String name, int numberOfBumpers, double prob){
-        tables.add(new TableClass(name, numberOfBumpers, prob, 0, 0));
-    }
-
-    public void newFullPlayableTable(String name, int numberOfBumpers, double prob, int numberOfSpotTargets, int numberOfDropTargets){
-        tables.add(new TableClass(name, numberOfBumpers, prob, numberOfSpotTargets, numberOfDropTargets));
+        balls = 3;
     }
 
     public List<Bumper> getBumpers(){
-        return activeTable.getBumpers();
+        return table.getBumpers();
     }
 
     public List<Target> getTargets(){
-        return activeTable.getTargets();
+        return table.getTargets();
     }
 
     public String getTableName(){
-        return activeTable.getTableName();
+        return table.getTableName();
     }
 
     public int getAvailableBalls(){
         return balls;
     }
 
-    public Bonus getExtraBallBonus(){
-        return extraBallBonus;
-    }
-
-    public Table getCurrentTable(){
-        return activeTable;
-    }
-
-    public void setGameTable(Table newTable){
-        activeTable = newTable;
-    }
-
     public int dropBall(){
         balls --;
+        getCurrentTable().updatePlayable(balls);
         return getAvailableBalls();
     }
 
-    public boolean gameOver(){
-        return getAvailableBalls() == 0;
+    public void addBall(){
+        balls ++;
+    }
+
+    public int getCurrentScore(){
+        return score;
+    }
+
+    public void addScore(int value){
+        this.score += value;
+    }
+
+    public Bonus getExtraBallBonus(){
+        return extraBallBonus;
     }
 
     public Bonus getDropTargetBonus(){
@@ -84,6 +82,21 @@ public class Game {
         return jackPotBonus;
     }
 
+    public Table getCurrentTable(){
+        return table;
+    }
 
+    public void setGameTable(Table newTable){
+        table = newTable;
+        ((TableClass) table).addObserver(this);
+    }
 
+    public boolean gameOver(){
+        return getAvailableBalls() == 0;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        ((Visitor) arg).visitGame(this, (Table) o);
+    }
 }

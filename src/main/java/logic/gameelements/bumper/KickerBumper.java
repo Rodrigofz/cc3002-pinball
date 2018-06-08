@@ -1,5 +1,7 @@
 package logic.gameelements.bumper;
 
+import logic.table.TableClass;
+
 public class KickerBumper extends AbstractBumper {
 
     public KickerBumper(){

@@ -1,5 +1,7 @@
 package logic.gameelements.bumper;
 
+import logic.table.TableClass;
+
 public class PopBumper extends AbstractBumper {
     public PopBumper(){
         super();

@@ -41,4 +41,16 @@ public class KickerBumperTest {
         bumperTest.setScore(700);
         assertEquals(700, bumperTest.getScore());
     }
+
+    @Test
+    public void hitAndUpgrade(){
+        assertEquals(5, bumperTest.remainingHitsToUpgrade());
+        bumperTest.hit();
+        bumperTest.hit();
+        bumperTest.hit();
+        bumperTest.hit();
+        bumperTest.hit();
+        assertEquals(0, bumperTest.remainingHitsToUpgrade());
+        assertTrue(bumperTest.isUpgraded());
+    }
 }
