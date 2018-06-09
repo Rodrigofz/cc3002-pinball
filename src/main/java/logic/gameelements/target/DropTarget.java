@@ -2,6 +2,9 @@ package logic.gameelements.target;
 
 import visitor.DropTargetHittedVisitor;
 import visitor.DropTargetResetVisitor;
+import visitor.ExtraBallBonusVisitor;
+
+import java.util.Random;
 
 public class DropTarget extends AbstractTarget {
 
@@ -11,6 +14,12 @@ public class DropTarget extends AbstractTarget {
     }
 
     public int hit(){
+        Random randGen = new Random(-2300);
+        double randNum = randGen.nextDouble();
+        if (randNum < 0.3){
+            this.setChanged();
+            notifyObservers(new ExtraBallBonusVisitor());
+        }
         this.setChanged();
         notifyObservers(new DropTargetHittedVisitor());
         super.hit();

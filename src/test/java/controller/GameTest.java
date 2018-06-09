@@ -16,7 +16,7 @@ public class GameTest {
     @Before
     public void setup() {
         gameTest = new Game();
-        tableTest = new TableClass("TableTest", 3, 0.5, 2, 2, 0.5);
+        tableTest = new TableClass("TableTest", 3, 0.5, 2, 2, 3);
         gameTest.setGameTable(tableTest);
     }
 
@@ -105,6 +105,17 @@ public class GameTest {
         //2 drop targets -> 200
         //all drop targets -> 2000000
         assertEquals(2200200, gameTest.getCurrentScore());
+    }
+
+    //Pseudo random tested
+    public void upgradeBumperBonusTest(){
+        assertEquals(0, gameTest.getExtraBallBonus().timesTriggered());
+        //Thanks to the seed in the bumper, we know that the first one is a
+        gameTest.getCurrentTable().getBumpers().get(0).hit();
+        gameTest.getCurrentTable().getBumpers().get(0).hit();
+        gameTest.getCurrentTable().getBumpers().get(0).hit();
+
+        assertEquals(1, gameTest.getExtraBallBonus().timesTriggered());
     }
 
 

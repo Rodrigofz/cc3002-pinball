@@ -1,8 +1,9 @@
 package logic.gameelements.bumper;
 import visitor.ScoreVisitor;
-import visitor.UpgradeVisitor;
+import visitor.ExtraBallBonusVisitor;
 
 import java.util.Observable;
+import java.util.Random;
 
 public abstract class AbstractBumper extends Observable implements Bumper  {
     private int remainingHits;
@@ -24,8 +25,12 @@ public abstract class AbstractBumper extends Observable implements Bumper  {
 
     public void upgrade(){
         this.upgraded = true;
-        this.setChanged();
-        notifyObservers(new UpgradeVisitor());
+        Random randGen = new Random(-2100);
+        double randNum = randGen.nextDouble();
+        if (randNum < 0.1) {
+            this.setChanged();
+            notifyObservers(new ExtraBallBonusVisitor());
+        }
     }
 
     public void downgrade(){

@@ -1,6 +1,5 @@
 package logic.table;
 
-import javafx.scene.effect.Light;
 import logic.gameelements.Hittable;
 import logic.gameelements.bumper.AbstractBumper;
 import logic.gameelements.bumper.Bumper;
@@ -12,8 +11,6 @@ import logic.gameelements.target.Target;
 import visitor.*;
 
 import java.util.*;
-
-import static jdk.nashorn.internal.objects.NativeMath.random;
 
 public class TableClass extends Observable implements Table, Observer {
     private String name;
@@ -33,33 +30,10 @@ public class TableClass extends Observable implements Table, Observer {
     private boolean playable;
 
     public TableClass(String name, int numberOfBumpers, double prob, int numberOfSpotTargets, int numberOfDropTargets){
-        this.name = name;
-        this.numberOfBumpers =  numberOfBumpers;
-        this.bumpers = new ArrayList<Bumper>();
-        this.dropTargets = new ArrayList<DropTarget>();
-        this.spotTargets = new ArrayList<SpotTarget>();
-        this.prob = prob;
-        this.numberOfSpotTargets = numberOfSpotTargets;
-        this.numberOfDropTargets = numberOfDropTargets;
-        this.currentlyDroppedDropTargets = 0;
-        this.score = 0;
-        this.playable = true;
-
-        for (int i=0; i<numberOfSpotTargets; i++)
-            spotTargets.add(new SpotTarget());
-
-        for (int i=0; i<numberOfDropTargets; i++)
-            dropTargets.add(new DropTarget());
-
-        for (int i=0; i<numberOfBumpers; i++){
-            double randNum = Math.random();
-            bumpers.add((randNum<prob) ? new PopBumper(): new KickerBumper());
-        }
-
-        this.observateObservers();
+        this(name, numberOfBumpers, prob, numberOfSpotTargets, numberOfDropTargets, 100);
     }
 
-    public TableClass(String name, int numberOfBumpers, double prob, int numberOfSpotTargets, int numberOfDropTargets, double seed){
+    public TableClass(String name, int numberOfBumpers, double prob, int numberOfSpotTargets, int numberOfDropTargets, int seed){
         this.name = name;
         this.numberOfBumpers =  numberOfBumpers;
         this.bumpers = new ArrayList<Bumper>();
@@ -78,9 +52,10 @@ public class TableClass extends Observable implements Table, Observer {
         for (int i=0; i<numberOfDropTargets; i++)
             dropTargets.add(new DropTarget());
 
+        Random randGen = new Random(seed);
         for (int i=0; i<numberOfBumpers; i++){
-            double randNum = random(seed);
-            bumpers.add((randNum<prob) ? new PopBumper(): new KickerBumper());
+            double randDob = randGen.nextDouble();
+            bumpers.add((randDob<prob) ? new PopBumper(): new KickerBumper());
         }
 
         this.observateObservers();
@@ -175,9 +150,9 @@ public class TableClass extends Observable implements Table, Observer {
         return score;
     }
 
-    public void bumperUpgraded(){
+    public void bumperUpgradeBonus(){
         this.setChanged();
-        notifyObservers(new UpgradeVisitor());
+        notifyObservers(new ExtraBallBonusVisitor());
     }
 
     @Override

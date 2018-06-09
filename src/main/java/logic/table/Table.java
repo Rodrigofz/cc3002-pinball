@@ -71,7 +71,7 @@ public interface Table {
 
     int getScore();
 
-    void bumperUpgraded();
+    void bumperUpgradeBonus();
 
     void notifySpotTarget();
 
