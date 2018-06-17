@@ -110,7 +110,11 @@ public class GameTest {
     //Pseudo random tested
     public void upgradeBumperBonusTest(){
         assertEquals(0, gameTest.getExtraBallBonus().timesTriggered());
-        //Thanks to the seed in the bumper, we know that the first one is a
+        /*
+        Thanks to the seed in the bumper, we know that the first one is a PopBumper
+        we also know that it should trigger the bonus the first time it upgrades
+         */
+
         gameTest.getCurrentTable().getBumpers().get(0).hit();
         gameTest.getCurrentTable().getBumpers().get(0).hit();
         gameTest.getCurrentTable().getBumpers().get(0).hit();
@@ -118,6 +122,16 @@ public class GameTest {
         assertEquals(1, gameTest.getExtraBallBonus().timesTriggered());
     }
 
+    public void dropTargetHitBonusTest(){
+        assertEquals(0, gameTest.getExtraBallBonus().timesTriggered());
+        /*
+        We know that the first target is a dropTarget. Thanks to the seed in the
+        target class, we know that the first time it should trigger the bonus
+         */
+        gameTest.getCurrentTable().getTargets().get(0).hit();
+
+        assertEquals(1, gameTest.getExtraBallBonus().timesTriggered());
+    }
 
 
 }

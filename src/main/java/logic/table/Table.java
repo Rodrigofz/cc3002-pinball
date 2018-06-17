@@ -67,18 +67,47 @@ public interface Table {
      */
     boolean isPlayableTable();
 
+    /**
+     * Sets the score as a new one
+     *
+     * @param dif   New score to be setted
+     */
     void changeScore(int dif);
 
+    /**
+     * Gets the current score of the table
+     *
+     * @return score variable
+     */
     int getScore();
 
-    void bumperUpgradeBonus();
+    /**
+     * Notify the observers that an ExtraBallBonus must be triggered
+     */
+    void extraBallBonusNotify();
 
+    /**
+     * Notify the observers that a SpotTarget has been hitted
+     */
     void notifySpotTarget();
 
+    /**
+     * Notify the observers that a DropTarget has been hitted
+     */
     void notifyDropTarget();
 
+    /**
+     * Update the playable state of the table, given an amount of balls
+     *
+     * @param numberOfBalls     If the amount is 0, the table is not playable
+     */
     void updatePlayable(int numberOfBalls);
 
+    /**
+     * Changes the number of currently dropped DropTargets for a new value
+     *
+     * @param newValue      Value to be setted as the currently dropped DropTargets
+     */
     public void setCurrentlyDroppedDropTargets(int newValue);
 
 }
