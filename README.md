@@ -2,7 +2,7 @@
 
 ### Código
 
-El código del proyecto se divide en 4 grandes categorías distintas:
+El código del proyecto se divide en 4 grandes categorías distintas, los paquetes se pueden encontrar en src/main/java:
 
 ###### Controller
 Aquí se encuentra la clase game. Es el controlador del juego, se encarga de unir todos los componentes de este para que trabajen en conjunto.
@@ -26,4 +26,8 @@ Elementos usados para el patrón de diseño visitor, explicado más adelante.
 El juego se diseñó de tal forma que un objeto game contiene y controla a un objeto table. Además la observa, utilizando el patrón de diseño observer. A su vez, este objeto table contiene hittables, que pueden ser bumpers o targets. Siendo estos últimos observados por table.
 
 Como se utiliza el patrón de diseño observer, los hittables envían notificaciones a table y esta a game. Para enviar dichas notificaciones, se utiliza el patrón de diseño visitor. Cada visitor puede visitar a table o a game, y cada uno cumple un rol distinto, son 5 en total. En general, los hittables notifican a table cuando hacen alguna acción, y a su vez, table notifica a game cuando esta misma o sus hittables realizan alguna acción. 
+
+### Test
+
+Los tests para las distintas clases se encuentran en src/test/java. Se testearon todas las clases. No se hicieron test explícitamente para los visitors, puesto que el funcionamiento de estos se testea al realizar los eventos que estos deben activar y notificar.
  
