@@ -6,7 +6,7 @@ import logic.table.Table;
 
 public class DropTargetResetVisitor implements Visitor {
     /**
-     * Drops 1 of the number of currently dropped DropTargets
+     * Drops 1 of the number of currently dropped Dgid ropTargets
      *
      * @param table         Table to be visited
      * @param hittable      Hittable that is triggering the visit

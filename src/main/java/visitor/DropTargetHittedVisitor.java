@@ -13,8 +13,9 @@ public class DropTargetHittedVisitor implements Visitor {
      */
     @Override
     public void visitTable(Table table, Hittable hittable) {
-        table.setCurrentlyDroppedDropTargets(table.getNumberOfDropTargets() + 1);
-        table.notifyDropTarget();
+        table.setCurrentlyDroppedDropTargets(table.getCurrentlyDroppedDropTargets() + 1);
+        if (table.getCurrentlyDroppedDropTargets() == table.getNumberOfDropTargets())
+            table.notifyDropTarget();
     }
 
     /**

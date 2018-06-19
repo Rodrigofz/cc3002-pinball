@@ -78,7 +78,7 @@ public class GameTest {
         assertEquals(0, gameTest.getCurrentScore());
         for (Bumper b: gameTest.getCurrentTable().getBumpers())
             b.hit();
-        //With the seed 0.5, there will be 1 kicker bumper and 2 pop bumpers
+        //With the seed used, there will be 1 kicker bumper and 2 pop bumpers (500 + 100 + 100)
         assertEquals(700, gameTest.getCurrentScore());
     }
 
@@ -99,12 +99,12 @@ public class GameTest {
             t.hit();
 
         assertEquals(2, gameTest.getJackPotBonus().timesTriggered());
-        assertEquals(2, gameTest.getDropTargetBonus().timesTriggered());
+        assertEquals(1, gameTest.getDropTargetBonus().timesTriggered());
 
         //2 spot targets -> 200000
         //2 drop targets -> 200
-        //all drop targets -> 2000000
-        assertEquals(2200200, gameTest.getCurrentScore());
+        //all drop targets -> 1000000
+        assertEquals(1200200, gameTest.getCurrentScore());
     }
 
     //Pseudo random tested

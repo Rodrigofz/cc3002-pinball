@@ -228,7 +228,6 @@ public class TableClass extends Observable implements Table, Observer {
      * Notifies the observers that a DropTarget has been hitted
      */
     public void notifyDropTarget(){
-        currentlyDroppedDropTargets--;
         this.setChanged();
         notifyObservers(new DropTargetHittedVisitor());
     }
