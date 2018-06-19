@@ -53,7 +53,7 @@ public class HomeworkTwoFacade {
     }
 
     /**
-         * Gets the instance of {@link JackPotBonus} currently in the game.
+     * Gets the instance of {@link JackPotBonus} currently in the game.
      *
      * @return the JackPotBonus instance
      */
