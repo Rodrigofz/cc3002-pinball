@@ -33,6 +33,7 @@ public class Game implements Observer{
      * Constructor of the class, creates the bonuses and set the number of balls in 3
      */
     public Game(){
+        table = new TableClass("Mesa inicial", 0, 1, 0,0);
         extraBallBonus = new ExtraBallBonus();
         dropTargetBonus = new DropTargetBonus();
         jackPotBonus = new JackPotBonus();
